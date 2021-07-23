@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+    <ui:define name="content">
+        <p:dataTable id="gastos"
+                     value="#{gastoBacking.gastos}" 
+                     var="gasto">
+            <p:column headerText="#{msg['headerFecha']}">
+                <h:outputText value="#{gasto.fecha}">
+                    <f:convertDateTime pattern = "dd-MM-yyyy" />
+                </h:outputText> 
+            </p:column>
+            <p:column headerText="#{msg['headerDescripcion']}">
+                <h:outputText value="#{gasto.descripcion}"/>
+            </p:column>
+            <p:column headerText="#{msg['headerImporte']}">
+                <h:outputText value="#{gasto.importe}"/>
+            </p:column>
+            <p:column headerText="#{msg['headerSubcategoria']}">
+                <h:outputText value="#{gasto.subcategoria.nombre}"/>
+            </p:column>
+            <p:column>
+                <h:link outcome="/Gasto/edit" value="#{msg['botonEditar']}">
+                    <f:param name="id" value="#{gasto.id}" />
+                </h:link>
+            </p:column>
+            <p:column>
+                <p:commandLink actionListener="#{gastoBacking.delete(gasto)}" 
+                               value="#{msg['botonEliminar']}"
+                               update="gastos">
+                    <p:confirm header="Confirmation" 
+                               message="#{msg['mensajeGasto']} #{gasto.id}?" 
+                               icon="ui-icon-alert" />
+                </p:commandLink>
+            </p:column>                    
+        </p:dataTable>
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="#{msg['yes']}" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+            <p:commandButton value="#{msg['no']}" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+        </p:confirmDialog>
+    </ui:define>
+</ui:composition>

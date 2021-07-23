@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui"
+    template="./../template.xhtml">
+    
+  
+    
+    <ui:define name="content"> 
+        
+        <h:form>            
+        <p:outputLabel value="#{msg['periodo']}" class="texto"/>
+                <p:selectOneMenu id="periodo" value="#{graficoBacking.periodo}" rendered="#{graficoBacking.periodos.size() != 0}" >
+                    
+                    <f:selectItem itemLabel="#{msg['seleccionarPeriodo']}" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{graficoBacking.periodos}" var="periodo" itemLabel="#{periodo.descripcion}" itemValue="#{periodo}" />
+                    </p:selectOneMenu> 
+        <p:commandButton value="#{msg['botonMostrar']}" action="#{graficoBacking.createAnimatedModels()}" update="panel"/>
+        
+        <h:panelGroup id="panel" layout="block">
+                <p:chart id="barra" type="bar" model="#{graficoBacking.modeloBarras}" rendered="#{graficoBacking.periodos.size() != 0}"/>
+        </h:panelGroup>
+           
+        </h:form>
+    </ui:define>
+</ui:composition>

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!--h:outputStylesheet name="/css/default.css"/-->
+        <!--h:outputStylesheet name="/css/cssLayout.css"/-->
+        <h:outputStylesheet name="/css/main.css"/>
+        <ui:insert name="head"></ui:insert>
+        <title>
+            <ui:insert name="title">Sistema de control de gastos</ui:insert>
+        </title>
+    </h:head>
+
+    <h:body>
+        <f:view contentType="text/html">
+            <h:form>
+                <p:growl id="messages" autoUpdate="true"></p:growl>
+                <div id="top">
+                    <h2 id="user">
+                        <h:outputText value="#{sessionBacking.usuario.email}"/>
+                    </h2>
+                    <h1 id="empresa">
+                        <h:outputText value="#{sessionBacking.usuario.empresa.rason_social}" style="font-size: 20px; color: #fff"/>
+                    </h1>
+                    <ul id="menu">
+                        <p:menubar>
+                            <p:submenu label="#{msg['submenuUsuarios']}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Usuario/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Usuario/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuEmpresas']}" rendered="#{(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Empresa/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Empresa/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuGastos']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Gasto/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Gasto/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuCategorias']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Categoria/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Categoria/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuSubcategorias']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Subcategoria/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Subcategoria/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuPresupuestos']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Presupuesto/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Presupuesto/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuPeriodos']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuListar']}" url="/Periodo/index.xhtml" />
+                                <p:menuitem value="#{msg['menuNuevo']}" url="/Periodo/new.xhtml" />
+                            </p:submenu>
+                            <p:submenu label="#{msg['submenuReportes']}" rendered="#{!(sessionBacking.usuario.empresa == null)}">
+                                <p:menuitem value="#{msg['menuDesvio']}" url="/Reporte/desvio.xhtml" />
+                                <p:menuitem value="#{msg['menuGastos']}" url="/Reporte/gxcyp.xhtml" />
+                                <p:menuitem value="#{msg['menuGraficoBarra']}" url="/Reporte/gxp.xhtml" />
+                                <p:menuitem value="#{msg['menuGraficoLinea']}" url="/Reporte/lineadesvio.xhtml" />
+                            </p:submenu>
+                            <f:facet name="options">
+                                <p:commandButton action="#{sessionBacking.logout()}" 
+                                                 value="#{msg['botonSalir']}"  
+                                                 icon="ui-icon-extlink">
+                                </p:commandButton>
+                            </f:facet>
+                        </p:menubar>
+                    </ul>
+                    <ui:insert name="top"></ui:insert>                    
+                </div>
+                <div id="content" class="center_content">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+                <div id="bottom">
+                    <ul>
+                        <ui:insert name="bottom">Programacion Orientada a Objetos 2017.</ui:insert>                        
+                        <ui:insert name="bottom"> Carrera: Ingenieria en Informatica.</ui:insert>
+                    </ul>
+                    <p>
+                        <ui:insert name="bottom"> Autores: Cuello Andres - Gabriel Perez.</ui:insert>
+                    </p>
+                </div>              
+            </h:form>
+        </f:view>
+    </h:body>
+</html>

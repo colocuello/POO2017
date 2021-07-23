@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+    <ui:define name="head">
+        <f:metadata>
+            <f:viewParam name="id" value="#{periodoBacking.periodo}"/>
+        </f:metadata>
+    </ui:define>
+    <ui:define name="content">
+        <h2>#{msg['headerActualizarPeriodo']}</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="">
+            
+            <p:outputLabel value="#{msg['headerDescripcion']}"></p:outputLabel>
+            <p:inputText value="#{periodoBacking.periodo.descripcion}"/>
+            <p:outputLabel value="#{msg['headerDesde']}"></p:outputLabel>
+            <p:calendar value = "#{periodoBacking.periodo.desde}" label = "Date"></p:calendar>
+            <p:outputLabel value="#{msg['headerHasta']}"></p:outputLabel>
+            <p:calendar value = "#{periodoBacking.periodo.hasta}" label = "Date"></p:calendar>
+            <p:commandButton value="#{msg['botonActualizar']}" 
+                             action="#{periodoBacking.update()}" 
+                             update="messages"/>
+            <p:button value="#{msg['botonCancelar']}" outcome="/Periodo/index"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>

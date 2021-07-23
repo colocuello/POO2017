@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+
+    <ui:define name="content">
+        <h2>#{msg['headerNuevoUsuario']}</h2>
+        <br />
+        <p:panelGrid columns="2" styleClass="">
+            <p:outputLabel value="#{msg['headerUsuario']}"></p:outputLabel>
+            <p:inputText value="#{usuarioBacking.usuario.username}"/>
+            <p:outputLabel value="#{msg['headerClave']}"></p:outputLabel>
+            <p:password value="#{usuarioBacking.usuario.password}"/>
+            <p:outputLabel value="#{msg['headerApellido']}"></p:outputLabel>
+            <p:inputText value="#{usuarioBacking.usuario.apellido}"/>
+            <p:outputLabel value="#{msg['headerEmail']}"></p:outputLabel>                
+            <p:inputText value="#{usuarioBacking.usuario.email}"/>
+            <p:outputLabel value="#{msg['headerEmpresa']}" rendered="#{sessionBacking.usuario.empresa == null}"></p:outputLabel>
+            <p:selectOneMenu value="#{usuarioBacking.usuario.empresa}" rendered="#{sessionBacking.usuario.empresa == null}">
+                <f:selectItem itemLabel="#{msg['seleccionar']}" itemValue="" />
+                <f:selectItems value="#{usuarioBacking.empresas}" var="empresa" itemLabel="#{empresa.rason_social}"/>
+            </p:selectOneMenu>
+            <p:commandButton value="#{msg['botonGuardar']}" 
+                             action="#{usuarioBacking.create()}" 
+                             update="messages"/>
+            <p:button value="#{msg['botonCancelar']}" outcome="/Usuario/index"/>
+        </p:panelGrid>
+    </ui:define>
+</ui:composition>

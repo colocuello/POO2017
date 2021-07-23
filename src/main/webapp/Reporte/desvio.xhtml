@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="./../template.xhtml">
+
+    <ui:define name="content">
+
+        <h:form id="Listara">
+
+            <h:panelGrid id="panel1" columns="2" cellpadding="5px">
+                <h:outputText value="#{msg['headerPeriodo']}" style="font-weight: bold"/>
+
+                <h:outputText value="#{msg['headerSubcategoria']}" style="font-weight: bold" />
+
+                <p:selectOneMenu id="periodo" value="#{reporteBacking.periodo}" rendered="#{reporteBacking.periodos.size() != 0}" >
+                    <p:ajax update="gastos" />
+                    <p:ajax update="presupuestos" />
+                    <p:ajax update="panel2" />
+
+                    <f:selectItem itemLabel="#{msg['seleccionarPeriodo']}" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{reporteBacking.periodos}" var="periodo" itemLabel="#{periodo.descripcion}" itemValue="#{periodo}"/>
+                </p:selectOneMenu>
+                <p:selectOneMenu id="subcategoria" value="#{reporteBacking.subcategoria}" rendered="#{reporteBacking.subcategorias.size() != 0}" >
+                    <p:ajax update="gastos" />
+                    <p:ajax update="presupuestos" />
+                    <p:ajax update="panel2" />
+
+                    <f:selectItem itemLabel="#{msg['seleccionarSubcategoria']}" itemValue="#{null}" noSelectionOption="true" />
+                    <f:selectItems value="#{reporteBacking.subcategorias}" var="subcategoria" itemLabel="#{subcategoria.nombre}" itemValue="#{subcategoria}"/>
+                </p:selectOneMenu>                
+
+            </h:panelGrid>
+            <h:panelGrid id="panel2" columns="2" cellpadding="5px">
+                <h:outputText value="#{msg['presupuestoTotal']} #{reporteBacking.presupuestoT()}" style="font-weight: bold"/>
+                <h:outputText value="#{msg['gastoTotal']} #{reporteBacking.gastoPeriodoSubT()}" style="font-weight: bold"/> 
+            </h:panelGrid>
+
+            <h:panelGrid id="panel3" columns="1" cellpadding="5px">
+                <h:outputText value="#{msg['presupuesto']}"  style="font-weight: bold ; text-align:center"/> 
+            </h:panelGrid>
+
+            <p:dataTable id="presupuestos"
+                         value="#{reporteBacking.presupuestoPeriodoSub()}" 
+                         var="presupuesto">
+                <p:column headerText="#{msg['headerMonto']}">
+                    <h:outputText value="#{presupuesto.monto}"/>
+                </p:column>
+                <p:column headerText="#{msg['headerPeriodo']}">
+                    <h:outputText value="#{presupuesto.periodo.descripcion}"/>
+                </p:column>
+                <p:column headerText="#{msg['headerSubcategoria']}">
+                    <h:outputText value="#{presupuesto.subcategoria.nombre}"/>
+                </p:column>
+
+
+            </p:dataTable>
+            <p/>
+            <p/>
+
+            <h:panelGrid id="panel4" columns="1" cellpadding="5px">
+                <h:outputText value="#{msg['gasto']}"  style="font-weight: bold ; text-align:center"/> 
+            </h:panelGrid>
+
+            <p:dataTable id="gastos"
+                         value="#{reporteBacking.gastoPeriodoSub()}" 
+                         var="gasto">
+                <p:column headerText="#{msg['headerFecha']}">
+                    <h:outputText value="#{gasto.fecha}">
+                        <f:convertDateTime pattern = "dd-MM-yyyy" />
+                    </h:outputText> 
+                </p:column>
+                <p:column headerText="#{msg['headerDescripcion']}">
+                    <h:outputText value="#{gasto.descripcion}"/>
+                </p:column>
+                <p:column headerText="#{msg['headerImporte']}">
+                    <h:outputText value="#{gasto.importe}"/>
+                </p:column>
+                <p:column headerText="#{msg['headerSubcategoria']}">
+                    <h:outputText value="#{gasto.subcategoria.nombre}"/>
+                </p:column>
+
+            </p:dataTable>
+
+        </h:form>
+    </ui:define>
+</ui:composition>
+

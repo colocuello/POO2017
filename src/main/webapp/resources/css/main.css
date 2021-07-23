@@ -1,0 +1,50 @@
+/*
+	
+	project: Nautica (free template)
+	author: Luka Cvrk
+	Solucija (www.solucija.com)
+	
+*/
+
+*{margin:0;padding:0;}:focus,:active {outline:0}ul,ol{list-style:none}img{border:0} 
+body { font: .74em Sans-Serif; color: #444; background: #f4f4f4; line-height: 1.6em; }
+a { text-decoration: none; color: #008080; }
+p  { margin: 0 0 15px; }
+.wrap { margin: 0 auto; width: 960px; }
+
+#top { height: 160px; width:100%; background-image: url("/resources/img/bg.jpg"); background-color: #045491; background-repeat: no-repeat; background-position: center top; color: #ccc; margin: 0 0 30px; }
+#top p { float: right; margin: 20px 0 0; }
+
+#empresa { float: left; margin: 40px 20px 50px 0; color: #fff; letter-spacing: .2em; font-size: 1.9em; }
+#user { float: right; margin: 40px 20px 50px 0; color: #fff; text-align: right; font-size: 20px  }
+#empresa a { color: #fff; }
+#logo { float: left; margin: 40px 20px 50px 0; color: #fff; letter-spacing: .2em; font-size: 1.9em; }
+#logo a { color: #fff; }
+
+h1 { letter-spacing: -0.04em; font-size: 1.8em; text-shadow: 1px 1px 1px #000; }
+h2 { font-size: 1.4em; text-shadow: 1px 1px 1px #fff; margin: 0 0 10px; color: #008080; }
+h3 { font-size: 1.2em; margin: 0 0 6px; }
+
+#menu { clear: both; padding: 13px 0 0; color: blue}
+
+#main { clear: left; float: left; width: 690px; } 
+
+.l { float: left; width: 310px; }
+.r { float: right; width: 330px; }
+.l img, .r img { float: left; margin: 0 13px 5px 0; border: 2px solid #fff; }
+
+.line { clear: both; border-bottom: 1px dotted #ccc; padding: 10px 0 0; margin: 0 0 20px; }
+
+#side { float: right; width: 225px; color: #808080; background: #fff; padding: 11px; margin: 0 0 20px; }
+#side a { color: #444; }
+#side li { padding: 0 0 10px; }
+
+
+#bottom { clear: both; height: 120px; padding: 20px 0; color: #888; border-top: 1px dotted #ccc; }
+#bottom ul { float: left; width: 250px; position: absolute }
+#bottom p { float: right; width: 400px; text-align: right; }
+
+#footer { clear: both; height: 120px; padding: 20px 0; color: #888; border-top: 1px dotted #ccc; }
+#footer ul { float: left; width: 140px; }
+#footer ul li { padding: 0 0 3px; }
+#footer p { float: right; width: 400px; text-align: right; }
